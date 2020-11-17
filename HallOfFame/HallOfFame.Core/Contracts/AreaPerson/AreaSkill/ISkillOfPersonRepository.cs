@@ -2,7 +2,7 @@
 
 namespace HallOfFame.Core.Contracts.AreaPerson.AreaSkill
 {
-    public interface ISkillOfPersonRepository : IRepository<SkillsOfPerson>
+    public interface ISkillOfPersonRepository : IRepository<SkillOfPerson>
     {
     }
 }

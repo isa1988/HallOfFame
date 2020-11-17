@@ -11,7 +11,7 @@ namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
     {
         public SkillOfLevel()
         {
-            SkillsOfPersons = new List<SkillsOfPerson>();
+            SkillsOfPersons = new List<SkillOfPerson>();
         }
         /// <summary>
         /// Идентификатор
@@ -36,6 +36,6 @@ namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
         /// <summary>
         /// Люди
         /// </summary>
-        public List<SkillsOfPerson> SkillsOfPersons { get; set; }
+        public List<SkillOfPerson> SkillsOfPersons { get; set; }
     }
 }

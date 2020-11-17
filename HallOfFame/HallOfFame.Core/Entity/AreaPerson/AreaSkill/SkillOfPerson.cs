@@ -7,7 +7,7 @@ namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
     /// <summary>
     /// Навыки человека
     /// </summary>
-    public class SkillsOfPerson : IEntity
+    public class SkillOfPerson : IEntity
     {
         /// <summary>
         /// Навык

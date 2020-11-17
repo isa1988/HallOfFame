@@ -12,7 +12,7 @@ namespace HallOfFame.Core.Entity.AreaPerson
     {
         public Person()
         {
-            SkillsOfPersons = new List<SkillsOfPerson>();
+            SkillsOfPersons = new List<SkillOfPerson>();
             SurName = string.Empty;
             FirstName = string.Empty;
         }
@@ -34,6 +34,6 @@ namespace HallOfFame.Core.Entity.AreaPerson
         /// <summary>
         /// Навыки
         /// </summary>
-        public List<SkillsOfPerson> SkillsOfPersons { get; set; }
+        public List<SkillOfPerson> SkillsOfPersons { get; set; }
     }
 }
