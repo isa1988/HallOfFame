@@ -35,9 +35,9 @@ namespace HallOfFame.DAL.Repository.AreaPerson.AreaSkill
             }
         }
 
-        protected override IQueryable<Skill> ResolveInclude(ResolveOptions resolveOptions)
+        protected override IQueryable<Skill> ResolveInclude(ResolveOptions resolveOptions, bool isDelete)
         {
-            IQueryable<Skill> query = dbSet;
+            IQueryable<Skill> query = dbSet.Where(x => x.IsDelete);
 
             if (resolveOptions.IsSkillOfLevels)
             {

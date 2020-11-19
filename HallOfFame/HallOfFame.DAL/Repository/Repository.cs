@@ -39,7 +39,7 @@ namespace HallOfFame.DAL.Repository
         public virtual async Task<List<T>> GetAllOfPageAsync(int pageNumber, int rowCount, ResolveOptions resolveOptions = null)
         {
             int startIndex = (pageNumber - 1) * rowCount;
-            var entities =  await ResolveInclude(resolveOptions)
+            var entities =  await ResolveInclude(resolveOptions, false)
                    .Skip(startIndex)
                    .Take(rowCount)
                    .ToListAsync();
@@ -50,7 +50,26 @@ namespace HallOfFame.DAL.Repository
         //identity
         public virtual async Task<List<T>> GetAllAsync(ResolveOptions resolveOptions = null)
         {
-            var entities = await ResolveInclude(resolveOptions).ToListAsync();
+            var entities = await ResolveInclude(resolveOptions, false).ToListAsync();
+            ClearDbSetForInclude(entities);
+            return entities;
+        }
+
+        public virtual async Task<List<T>> GetDeleteAllOfPageAsync(int pageNumber, int rowCount, ResolveOptions resolveOptions = null)
+        {
+            int startIndex = (pageNumber - 1) * rowCount;
+            var entities = await ResolveInclude(resolveOptions, true)
+                .Skip(startIndex)
+                .Take(rowCount)
+                .ToListAsync();
+            ClearDbSetForInclude(entities);
+            return entities;
+        }
+
+        //identity
+        public virtual async Task<List<T>> GetDeleteAllAsync(ResolveOptions resolveOptions = null)
+        {
+            var entities = await ResolveInclude(resolveOptions, true).ToListAsync();
             ClearDbSetForInclude(entities);
             return entities;
         }
@@ -70,10 +89,22 @@ namespace HallOfFame.DAL.Repository
             return entry;
         }
 
-        public virtual EntityEntry<T> Delete(T entity)
+        public virtual EntityEntry<T> DeleteFromDB(T entity)
         {
             var entry = dbSet.Remove(entity);
             return entry;
+        }
+
+
+        public virtual void Delete(T entity)
+        {
+            entity.IsDelete = true;
+        }
+
+
+        public virtual void UnDelete(T entity)
+        {
+            entity.IsDelete = false;
         }
 
         public virtual async Task SaveAsync()
@@ -85,7 +116,7 @@ namespace HallOfFame.DAL.Repository
         {
             contextDB.SaveChanges();
         }
-        protected abstract IQueryable<T> ResolveInclude(ResolveOptions resolveOptions);
+        protected abstract IQueryable<T> ResolveInclude(ResolveOptions resolveOptions, bool isDelete);
     }
 
     public abstract class Repository<T, TId> : Repository<T>, IRepository<T, TId>
@@ -99,7 +130,17 @@ namespace HallOfFame.DAL.Repository
 
         public virtual async Task<T> GetByIdAsync(TId id, ResolveOptions resolveOptions = null)
         {
-            var entity = await ResolveInclude(resolveOptions).FirstOrDefaultAsync(x => x.Id.Equals(id));
+            var entity = await ResolveInclude(resolveOptions, false).FirstOrDefaultAsync(x => !x.Id.Equals(id));
+            if (entity == null)
+                throw new NullReferenceException("Не найдено значение по идентификатору");
+            ClearDbSetForInclude(entity);
+            return entity;
+        }
+
+
+        public virtual async Task<T> GetDeleteByIdAsync(TId id, ResolveOptions resolveOptions = null)
+        {
+            var entity = await ResolveInclude(resolveOptions, true).FirstOrDefaultAsync(x => x.Id.Equals(id));
             if (entity == null)
                 throw new NullReferenceException("Не найдено значение по идентификатору");
             ClearDbSetForInclude(entity);

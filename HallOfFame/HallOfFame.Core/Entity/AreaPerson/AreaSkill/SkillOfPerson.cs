@@ -28,5 +28,10 @@ namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
         /// Человек
         /// </summary>
         public Guid PersonId { get; set; }
+
+        /// <summary>
+        /// Пометка на удаление
+        /// </summary>
+        public bool IsDelete { get; set; }
     }
 }

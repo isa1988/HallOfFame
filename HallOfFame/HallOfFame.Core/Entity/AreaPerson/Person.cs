@@ -32,6 +32,11 @@ namespace HallOfFame.Core.Entity.AreaPerson
         public string FirstName { get; set; }
 
         /// <summary>
+        /// Пометка на удаление
+        /// </summary>
+        public bool IsDelete { get; set; }
+
+        /// <summary>
         /// Навыки
         /// </summary>
         public List<SkillOfPerson> SkillsOfPersons { get; set; }

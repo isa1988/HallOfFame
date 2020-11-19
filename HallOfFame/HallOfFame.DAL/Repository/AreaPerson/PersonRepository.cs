@@ -19,7 +19,7 @@ namespace HallOfFame.DAL.Repository.AreaPerson
         }
         public async Task<List<Person>> GetPersonsBySkill(Guid skillOfLevelId, ResolveOptions resolveOptions)
         {
-            var query = ResolveInclude(resolveOptions);
+            var query = ResolveInclude(resolveOptions, false);
 
             if (resolveOptions == null || (!resolveOptions.IsSkill))
                 query = query.Include(x => x.SkillsOfPersons);
@@ -41,9 +41,9 @@ namespace HallOfFame.DAL.Repository.AreaPerson
             }
         }
 
-        protected override IQueryable<Person> ResolveInclude(ResolveOptions resolveOptions)
+        protected override IQueryable<Person> ResolveInclude(ResolveOptions resolveOptions, bool isDelete)
         {
-            IQueryable<Person> query = dbSet;
+            IQueryable<Person> query = dbSet.Where(x => x.IsDelete == isDelete);
 
             if (resolveOptions == null)
             {

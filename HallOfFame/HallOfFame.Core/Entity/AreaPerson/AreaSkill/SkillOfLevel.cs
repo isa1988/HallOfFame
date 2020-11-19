@@ -34,6 +34,11 @@ namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
         public byte Level { get; set; }
 
         /// <summary>
+        /// Пометка на удаление
+        /// </summary>
+        public bool IsDelete { get; set; }
+
+        /// <summary>
         /// Люди
         /// </summary>
         public List<SkillOfPerson> SkillsOfPersons { get; set; }
