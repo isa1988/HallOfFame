@@ -12,6 +12,7 @@ namespace HallOfFame.DAL.Data.Configuration.AreaPerson.AreaSkill
         public void Configure(EntityTypeBuilder<Skill> builder)
         {
             builder.HasKey(e => e.Id);
+            builder.Property(p => p.Id).ValueGeneratedOnAdd();
 
             builder.Property(e => e.Name).IsRequired().HasMaxLength(100);
         }

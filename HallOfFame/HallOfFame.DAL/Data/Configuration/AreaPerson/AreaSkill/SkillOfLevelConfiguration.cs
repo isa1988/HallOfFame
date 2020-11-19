@@ -12,6 +12,7 @@ namespace HallOfFame.DAL.Data.Configuration.AreaPerson.AreaSkill
         public void Configure(EntityTypeBuilder<SkillOfLevel> builder)
         {
             builder.HasKey(e => e.Id);
+            builder.Property(p => p.Id).ValueGeneratedOnAdd();
 
             builder.HasOne(d => d.Skill)
                 .WithMany(p => p.SkillOfLevels)
