@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HallOfFame.Service.Dto.AreaPerson.AreaSkill.SkillOfLevel
 {
-    public class SkillOfLevelDto : IServiceDto<Guid>
+    public class SkillOfLevelDto : IServiceDto<long>
     {
         public SkillOfLevelDto()
         {
@@ -12,7 +12,7 @@ namespace HallOfFame.Service.Dto.AreaPerson.AreaSkill.SkillOfLevel
         /// <summary>
         /// Идентификатор
         /// </summary>
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Наименование
@@ -29,7 +29,7 @@ namespace HallOfFame.Service.Dto.AreaPerson.AreaSkill.SkillOfLevel
         /// <summary>
         /// Навык
         /// </summary>
-        public Guid SkillId { get; set; }
+        public long SkillId { get; set; }
 
         /// <summary>
         /// Уровень

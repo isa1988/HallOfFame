@@ -7,7 +7,7 @@ namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
     /// <summary>
     /// Навык
     /// </summary>
-    public class SkillOfLevel : IEntity<Guid>
+    public class SkillOfLevel : IEntity<long>
     {
         public SkillOfLevel()
         {
@@ -16,7 +16,7 @@ namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
         /// <summary>
         /// Идентификатор
         /// </summary>
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Навык
@@ -26,7 +26,7 @@ namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
         /// <summary>
         /// Навык
         /// </summary>
-        public Guid SkillId { get; set; }
+        public long SkillId { get; set; }
 
         /// <summary>
         /// Уровень

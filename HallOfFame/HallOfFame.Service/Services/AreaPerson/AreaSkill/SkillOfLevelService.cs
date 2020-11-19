@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using HallOfFame.Core.Contracts;
 using HallOfFame.Core.Contracts.AreaPerson.AreaSkill;
 using HallOfFame.Core.Entity.AreaPerson.AreaSkill;
 using HallOfFame.Core.Helper;
@@ -12,9 +10,9 @@ using HallOfFame.Service.Dto.AreaPerson.AreaSkill.SkillOfLevel;
 
 namespace HallOfFame.Service.Services.AreaPerson.AreaSkill
 {
-    public class SkillOfLevelService : GeneralService<SkillOfLevel, SkillOfLevelDto, SkillOfLevelEditDto, Guid>, ISkillOfLevelService
+    public class SkillOfLevelService : GeneralService<SkillOfLevel, SkillOfLevelDto, SkillOfLevelEditDto, long>, ISkillOfLevelService
     {
-        public SkillOfLevelService(IMapper mapper, IRepository<SkillOfLevel, Guid> repository, ISkillRepository skillRepository) : base(mapper, repository)
+        public SkillOfLevelService(IMapper mapper, ISkillOfLevelRepository repository, ISkillRepository skillRepository) : base(mapper, repository)
         {
             this.skillRepository = skillRepository;
         }

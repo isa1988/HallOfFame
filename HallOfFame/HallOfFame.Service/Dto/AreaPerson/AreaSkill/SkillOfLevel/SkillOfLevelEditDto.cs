@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace HallOfFame.Service.Dto.AreaPerson.AreaSkill.SkillOfLevel
 {
-    public class SkillOfLevelEditDto : IServiceDto<Guid>
+    public class SkillOfLevelEditDto : IServiceDto<long>
     {
         /// <summary>
         /// Идентификатор
         /// </summary>
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Наименование

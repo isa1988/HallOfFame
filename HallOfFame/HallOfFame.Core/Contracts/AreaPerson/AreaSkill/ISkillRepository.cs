@@ -4,7 +4,7 @@ using HallOfFame.Core.Entity.AreaPerson.AreaSkill;
 
 namespace HallOfFame.Core.Contracts.AreaPerson.AreaSkill
 {
-    public interface ISkillRepository : IRepository<Skill, Guid>
+    public interface ISkillRepository : IRepository<Skill, long>
     {
         Task<bool> IsEqualsAsyncTask(string name);
     }

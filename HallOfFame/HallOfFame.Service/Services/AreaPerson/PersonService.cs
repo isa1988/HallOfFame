@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using HallOfFame.Core.Contracts;
+using HallOfFame.Core.Contracts.AreaPerson;
 using HallOfFame.Core.Entity.AreaPerson;
 using HallOfFame.Core.Helper;
 using HallOfFame.Service.Contracts.AreaPerson;
@@ -8,9 +8,9 @@ using HallOfFame.Service.Dto.AreaPerson;
 
 namespace HallOfFame.Service.Services.AreaPerson
 {
-    public class PersonService : GeneralService<Person, PersonDto, PersonDto, Guid>, IPersonService
+    public class PersonService : GeneralService<Person, PersonDto, PersonDto, long>, IPersonService
     {
-        public PersonService(IMapper mapper, IRepository<Person, Guid> repository) : base(mapper, repository)
+        public PersonService(IMapper mapper, IPersonRepository repository) : base(mapper, repository)
         {
         }
 

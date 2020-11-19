@@ -8,7 +8,7 @@ namespace HallOfFame.Core.Entity.AreaPerson
     /// <summary>
     /// Человек
     /// </summary>
-    public class Person : IEntity<Guid>
+    public class Person : IEntity<long>
     {
         public Person()
         {
@@ -19,7 +19,7 @@ namespace HallOfFame.Core.Entity.AreaPerson
         /// <summary>
         /// Идентификатор
         /// </summary>
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Фамилия

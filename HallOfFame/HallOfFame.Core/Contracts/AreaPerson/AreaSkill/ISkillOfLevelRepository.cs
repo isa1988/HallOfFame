@@ -7,8 +7,8 @@ using HallOfFame.Core.Helper;
 
 namespace HallOfFame.Core.Contracts.AreaPerson.AreaSkill
 {
-    public interface ISkillOfLevelRepository : IRepository<SkillOfLevel, Guid>
+    public interface ISkillOfLevelRepository : IRepository<SkillOfLevel, long>
     {
-        Task<List<SkillOfLevel>> GetSkillByPerson(Guid personId, ResolveOptions resolveOptions);
+        Task<List<SkillOfLevel>> GetSkillByPerson(long personId, ResolveOptions resolveOptions);
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
 {
-    public class Skill : IEntity<Guid>
+    public class Skill : IEntity<long>
     {
         public Skill()
         {
@@ -15,7 +15,7 @@ namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
         /// <summary>
         /// Идентификатор
         /// </summary>
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Наименование

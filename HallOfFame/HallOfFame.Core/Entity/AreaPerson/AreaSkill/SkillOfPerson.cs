@@ -17,7 +17,7 @@ namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
         /// <summary>
         /// Навык
         /// </summary>
-        public Guid SkillOfLevelId { get; set; }
+        public long SkillOfLevelId { get; set; }
 
         /// <summary>
         /// Человек
@@ -27,7 +27,7 @@ namespace HallOfFame.Core.Entity.AreaPerson.AreaSkill
         /// <summary>
         /// Человек
         /// </summary>
-        public Guid PersonId { get; set; }
+        public long PersonId { get; set; }
 
         /// <summary>
         /// Пометка на удаление

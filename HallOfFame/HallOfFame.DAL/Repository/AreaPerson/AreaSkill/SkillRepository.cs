@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HallOfFame.DAL.Repository.AreaPerson.AreaSkill
 {
-    public class SkillRepository : RepositoryOfGIdGuid<Skill>, ISkillRepository
+    public class SkillRepository : Repository<Skill, long>, ISkillRepository
     {
         public SkillRepository(HallOfFameContex context)
             : base(context)

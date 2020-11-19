@@ -11,13 +11,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HallOfFame.DAL.Repository.AreaPerson
 {
-    public class PersonRepository : RepositoryOfGIdGuid<Person>, IPersonRepository
+    public class PersonRepository : Repository<Person, long>, IPersonRepository
     {
         public PersonRepository(HallOfFameContex context)
             : base(context)
         {
         }
-        public async Task<List<Person>> GetPersonsBySkill(Guid skillOfLevelId, ResolveOptions resolveOptions)
+        public async Task<List<Person>> GetPersonsBySkill(long skillOfLevelId, ResolveOptions resolveOptions)
         {
             var query = ResolveInclude(resolveOptions, false);
 

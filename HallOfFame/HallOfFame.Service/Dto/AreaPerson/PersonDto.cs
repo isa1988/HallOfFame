@@ -4,7 +4,7 @@ using HallOfFame.Service.Dto.AreaPerson.AreaSkill;
 
 namespace HallOfFame.Service.Dto.AreaPerson
 {
-    public class PersonDto : IServiceDto<Guid>
+    public class PersonDto : IServiceDto<long>
     {
         public PersonDto()
         {
@@ -15,7 +15,7 @@ namespace HallOfFame.Service.Dto.AreaPerson
         /// <summary>
         /// Идентификатор
         /// </summary>
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Фамилия
