@@ -8,4 +8,8 @@
     <ProjectReference Include="..\HallOfFame.DAL\HallOfFame.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
+  </ItemGroup>
+
 </Project>

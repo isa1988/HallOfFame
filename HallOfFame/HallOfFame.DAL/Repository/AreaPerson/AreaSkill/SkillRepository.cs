@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using HallOfFame.Core.Contracts.AreaPerson.AreaSkill;
 using HallOfFame.Core.Entity.AreaPerson.AreaSkill;
 using HallOfFame.Core.Helper;
@@ -16,7 +17,13 @@ namespace HallOfFame.DAL.Repository.AreaPerson.AreaSkill
             : base(context)
         {
         }
-        
+
+        public async Task<bool> IsEqualsAsyncTask(string name)
+        {
+            var isEquals = await dbSet.AnyAsync(x => x.Name.ToLower() == name.ToLower());
+            return isEquals;
+        }
+
         protected override void ClearDbSetForInclude(Skill entity)
         {
             if (entity.SkillOfLevels?.Count > 0)
