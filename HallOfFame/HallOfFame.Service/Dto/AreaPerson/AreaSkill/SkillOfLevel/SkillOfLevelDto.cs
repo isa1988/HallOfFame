@@ -18,9 +18,7 @@ namespace HallOfFame.Service.Dto.AreaPerson.AreaSkill.SkillOfLevel
         /// Наименование
         /// </summary>
         public string Name { get; set; }
-
-        public byte StartLevel { get; set; }
-
+        
         /// <summary>
         /// Навык
         /// </summary>
