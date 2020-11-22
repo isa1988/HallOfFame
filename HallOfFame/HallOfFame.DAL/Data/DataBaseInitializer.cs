@@ -39,6 +39,9 @@ namespace HallOfFame.DAL.Data
                 var context = serviceScope.ServiceProvider.GetService<HallOfFameContex>();
                 context.Database.EnsureCreated();
 
+                if (skillRepository.IsEqualsAsyncTask("SQL").Result)
+                    return;
+
                 var skills = SkillAddDB();
                 var skillOfLevels = SkillOfLevelAddDB(skills);
                 var persons = PersonAddDB();
