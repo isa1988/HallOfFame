@@ -24,6 +24,15 @@ namespace HallOfFame.DAL.Repository.AreaPerson.AreaSkill
             return isEquals;
         }
 
+        public virtual async Task<Skill> GetByNameAsync(string name, ResolveOptions resolveOptions = null)
+        {
+            var entity = await ResolveInclude(resolveOptions, false).FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
+            if (entity == null)
+                throw new NullReferenceException("Не найдено значение по имени");
+            ClearDbSetForInclude(entity);
+            return entity;
+        }
+
         protected override void ClearDbSetForInclude(Skill entity)
         {
             if (entity.SkillOfLevels?.Count > 0)

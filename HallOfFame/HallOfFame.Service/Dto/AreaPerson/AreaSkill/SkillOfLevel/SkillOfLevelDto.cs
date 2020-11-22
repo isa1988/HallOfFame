@@ -36,6 +36,8 @@ namespace HallOfFame.Service.Dto.AreaPerson.AreaSkill.SkillOfLevel
         /// </summary>
         public byte Level { get; set; }
 
+        public bool IsDelete { get; set; }
+
         /// <summary>
         /// Люди
         /// </summary>

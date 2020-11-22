@@ -67,10 +67,16 @@ namespace HallOfFame.Service.Contracts
         Task<EntityOperationResult<TDto>> GetByIdDeteilsAsync(TId id);
 
         /// <summary>
-        /// Удалить объект из БД
+        /// Пометить на удаление
         /// </summary>
         /// <param name="id">Идентификатор записи</param>
         /// <returns></returns>
         Task<EntityOperationResult<TDto>> DeleteItemAsync(TId id);
+        /// <summary>
+        /// Удалить объект из БД
+        /// </summary>
+        /// <param name="id">Идентификатор записи</param>
+        /// <returns></returns>
+        Task<EntityOperationResult<TDto>> DeleteItemFromDbAsync(TId id);
     }
 }

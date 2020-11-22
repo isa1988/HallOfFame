@@ -18,7 +18,7 @@ namespace HallOfFame.DAL.Repository.AreaPerson.AreaSkill
         {
         }
 
-        public async Task<List<SkillOfLevel>> GetSkillByPerson(long personId, ResolveOptions resolveOptions)
+        public async Task<List<SkillOfLevel>> GetSkillByPerson(long personId, ResolveOptions resolveOptions = null)
         {
             var query = ResolveInclude(resolveOptions, false);
             
@@ -31,6 +31,15 @@ namespace HallOfFame.DAL.Repository.AreaPerson.AreaSkill
             return entities;
         }
 
+        public async Task<SkillOfLevel> GetSkillByLevel(long skillId, byte level, ResolveOptions resolveOptions = null)
+        {
+            var query = ResolveInclude(resolveOptions, false);
+
+            var entity = await query.FirstOrDefaultAsync(x => x.SkillId == skillId && x.Level == level);
+            ClearDbSetForInclude(entity);
+
+            return entity;
+        }
         protected override void ClearDbSetForInclude(SkillOfLevel entity)
         {
             if (entity.SkillsOfPersons != null)

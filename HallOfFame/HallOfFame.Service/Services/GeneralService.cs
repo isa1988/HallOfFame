@@ -142,5 +142,28 @@ namespace HallOfFame.Service.Services
                 return EntityOperationResult<TDto>.Failure().AddError(ex.Message);
             }
         }
+
+        public virtual async Task<EntityOperationResult<TDto>> DeleteItemFromDbAsync(TId id)
+        {
+            try
+            {
+                TEntity entity = await repositoryBaseId.GetByIdAsync(id);
+
+                string error = CkeckBeforeDelete(entity);
+                if (!string.IsNullOrEmpty(error))
+                {
+                    return EntityOperationResult<TDto>.Failure().AddError(error);
+                }
+
+                var dto = mapper.Map<TDto>(entity);
+                repositoryBaseId.DeleteFromDB(entity);
+                await repositoryBaseId.SaveAsync();
+                return EntityOperationResult<TDto>.Success(dto);
+            }
+            catch (Exception ex)
+            {
+                return EntityOperationResult<TDto>.Failure().AddError(ex.Message);
+            }
+        }
     }
 }

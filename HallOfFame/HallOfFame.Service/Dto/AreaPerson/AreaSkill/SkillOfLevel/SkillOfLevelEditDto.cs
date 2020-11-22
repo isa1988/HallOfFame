@@ -24,5 +24,8 @@ namespace HallOfFame.Service.Dto.AreaPerson.AreaSkill.SkillOfLevel
         /// Конечный уровень
         /// </summary>
         public byte EndLevel { get; set; }
+
+        public bool IsDelete { get; set; }
+        public long SkillId { get; set; }
     }
 }

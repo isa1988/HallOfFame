@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using HallOfFame.Core.Contracts.AreaPerson.AreaSkill;
 using HallOfFame.Core.Entity.AreaPerson.AreaSkill;
 using HallOfFame.Core.Helper;
@@ -15,6 +16,16 @@ namespace HallOfFame.DAL.Repository.AreaPerson.AreaSkill
         public SkillOfPersonRepository(HallOfFameContex context)
             : base(context)
         {
+        }
+
+        public async Task<SkillOfPerson> GetByPersonAndSkill(long personId, long skillId, ResolveOptions resolveOptions = null)
+        {
+            var entity = await ResolveInclude(resolveOptions, false)
+                                         .FirstOrDefaultAsync(x => x.PersonId == personId && x.SkillOfLevelId == skillId);
+            if (entity == null)
+                throw new NullReferenceException("Не найдено значение");
+            ClearDbSetForInclude(entity);
+            return entity;
         }
 
         protected override void ClearDbSetForInclude(SkillOfPerson entity)

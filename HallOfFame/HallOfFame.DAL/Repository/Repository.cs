@@ -130,7 +130,7 @@ namespace HallOfFame.DAL.Repository
 
         public virtual async Task<T> GetByIdAsync(TId id, ResolveOptions resolveOptions = null)
         {
-            var entity = await ResolveInclude(resolveOptions, false).FirstOrDefaultAsync(x => !x.Id.Equals(id));
+            var entity = await ResolveInclude(resolveOptions, false).FirstOrDefaultAsync(x => x.Id.Equals(id));
             if (entity == null)
                 throw new NullReferenceException("Не найдено значение по идентификатору");
             ClearDbSetForInclude(entity);

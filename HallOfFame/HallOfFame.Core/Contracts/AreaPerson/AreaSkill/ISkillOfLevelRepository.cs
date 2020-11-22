@@ -9,6 +9,7 @@ namespace HallOfFame.Core.Contracts.AreaPerson.AreaSkill
 {
     public interface ISkillOfLevelRepository : IRepository<SkillOfLevel, long>
     {
-        Task<List<SkillOfLevel>> GetSkillByPerson(long personId, ResolveOptions resolveOptions);
+        Task<List<SkillOfLevel>> GetSkillByPerson(long personId, ResolveOptions resolveOptions = null);
+        Task<SkillOfLevel> GetSkillByLevel(long skillId, byte level, ResolveOptions resolveOptions = null);
     }
 }
