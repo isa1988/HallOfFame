@@ -30,6 +30,11 @@ namespace HallOfFame.WebAPI.AppStart.AutoMapper
                 .ForMember(p => p.Name, n => n.MapFrom(m => m.FirstName))
                 .ForMember(p => p.DisplayName, n => n.MapFrom(m => m.SurName))
                 .ForMember(p => p.Skills, n => n.MapFrom(m => m.SkillsOfPersons));
+            
+            CreateMap<PersonDto, PersonOneModel>()
+                .ForMember(p => p.Name, n => n.MapFrom(m => m.FirstName))
+                .ForMember(p => p.DisplayName, n => n.MapFrom(m => m.SurName))
+                .ForMember(p => p.Skills, n => n.MapFrom(m => m.SkillsOfPersons));
 
             CreateMap<PersonModel, PersonEditDto>()
                 .ForMember(p => p.FirstName, n => n.MapFrom(m => m.Name))
@@ -54,7 +59,7 @@ namespace HallOfFame.WebAPI.AppStart.AutoMapper
 
             CreateMap<SkillOfPersonDto, SkillModel>()
                 .ForMember(p => p.Name, n =>
-                    n.MapFrom(x => x.SkillOfLevel != null ? x.SkillOfLevel.Name : ""))
+                    n.MapFrom(x => x.SkillOfLevel != null && x.SkillOfLevel.Skill != null ? x.SkillOfLevel.Skill.Name : ""))
                 .ForMember(p => p.Level, n =>
                     n.MapFrom(x => x.SkillOfLevel != null ? x.SkillOfLevel.Level : 0));
         }

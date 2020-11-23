@@ -55,7 +55,7 @@ namespace HallOfFame.DAL.Repository.AreaPerson
                 query = query.Include(x => x.SkillsOfPersons);
                 if (resolveOptions.IsSkill)
                 {
-                    query = query.Include(x => x.SkillsOfPersons).ThenInclude(n => n.SkillOfLevel);
+                    query = query.Include(x => x.SkillsOfPersons).ThenInclude(n => n.SkillOfLevel).ThenInclude(m => m.Skill);
                 }
             }
 
