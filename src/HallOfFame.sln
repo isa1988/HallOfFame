@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallOfFame.WebAPI", "HallOfFame.WebAPI\HallOfFame.WebAPI.csproj", "{3FF7F7D5-3456-40FF-BAB7-C099B383C262}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HallOfFame.WebAPI", "HallOfFame.WebAPI\HallOfFame.WebAPI.csproj", "{3FF7F7D5-3456-40FF-BAB7-C099B383C262}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallOfFame.Core", "HallOfFame.Core\HallOfFame.Core.csproj", "{1C0827DD-A47E-4CED-A8FA-8F104A7FC52D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HallOfFame.Core", "HallOfFame.Core\HallOfFame.Core.csproj", "{1C0827DD-A47E-4CED-A8FA-8F104A7FC52D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallOfFame.DAL", "HallOfFame.DAL\HallOfFame.DAL.csproj", "{DCF6AC11-8F09-49F1-BBE6-A434C69CECF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HallOfFame.DAL", "HallOfFame.DAL\HallOfFame.DAL.csproj", "{DCF6AC11-8F09-49F1-BBE6-A434C69CECF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallOfFame.Service", "HallOfFame.Service\HallOfFame.Service.csproj", "{622F021E-D4C7-40C8-86E8-2447E82F17FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HallOfFame.Service", "HallOfFame.Service\HallOfFame.Service.csproj", "{622F021E-D4C7-40C8-86E8-2447E82F17FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{60F489E5-10FA-4AFF-A9ED-ABC1F5B26F2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallOfFame.ServiceUnitTests", "HallOfFame.ServiceUnitTests\HallOfFame.ServiceUnitTests.csproj", "{8C22CAEE-50DC-4C10-9613-34B54E9B2634}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,16 @@ Global
 		{622F021E-D4C7-40C8-86E8-2447E82F17FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{622F021E-D4C7-40C8-86E8-2447E82F17FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{622F021E-D4C7-40C8-86E8-2447E82F17FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C22CAEE-50DC-4C10-9613-34B54E9B2634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C22CAEE-50DC-4C10-9613-34B54E9B2634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C22CAEE-50DC-4C10-9613-34B54E9B2634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C22CAEE-50DC-4C10-9613-34B54E9B2634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C22CAEE-50DC-4C10-9613-34B54E9B2634} = {60F489E5-10FA-4AFF-A9ED-ABC1F5B26F2C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {828D6F03-F6DA-40B2-9278-453B30FC83C1}
