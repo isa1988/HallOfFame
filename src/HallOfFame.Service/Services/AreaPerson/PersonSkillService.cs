@@ -196,7 +196,7 @@ namespace HallOfFame.Service.Services.AreaPerson
 
         protected override string CkeckBeforeDelete(Person entity)
         {
-            throw new NotImplementedException();
+            return string.Empty;
         }
 
     }

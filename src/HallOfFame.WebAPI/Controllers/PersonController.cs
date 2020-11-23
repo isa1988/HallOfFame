@@ -119,5 +119,37 @@ namespace HallOfFame.WebAPI.Controllers
 
             return returnMessage;
         }
+
+
+        /// <summary>
+        /// Удалить человека
+        /// </summary>
+        /// <param name="model">сотрудник</param>
+        /// <returns></returns>
+        [HttpDelete("Delete{id:long}")]
+        public async Task<HttpResponseMessage> Delete(long id)
+        {
+
+            HttpResponseMessage returnMessage = new HttpResponseMessage();
+
+            var result = await personSkillService.DeleteItemFromDbAsync(id);
+            if (result.IsSuccess)
+            {
+
+                string message = ($"Person Delete - {result.Entity.Id}");
+                returnMessage = new HttpResponseMessage(HttpStatusCode.OK);
+                returnMessage.RequestMessage = new HttpRequestMessage(HttpMethod.Put, message);
+            }
+            else
+            {
+                returnMessage = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                returnMessage.RequestMessage = new HttpRequestMessage(HttpMethod.Put, result.GetErrorString());
+            }
+
+
+            return returnMessage;
+        }
+
+
     }
 }
