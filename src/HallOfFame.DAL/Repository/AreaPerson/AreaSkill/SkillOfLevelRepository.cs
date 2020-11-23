@@ -36,6 +36,8 @@ namespace HallOfFame.DAL.Repository.AreaPerson.AreaSkill
             var query = ResolveInclude(resolveOptions, false);
 
             var entity = await query.FirstOrDefaultAsync(x => x.SkillId == skillId && x.Level == level);
+            if (entity == null)
+                throw new NullReferenceException("Не найдено значение по уровню и скилу");
             ClearDbSetForInclude(entity);
 
             return entity;

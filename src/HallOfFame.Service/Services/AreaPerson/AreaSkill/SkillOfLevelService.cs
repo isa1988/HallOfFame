@@ -59,6 +59,7 @@ namespace HallOfFame.Service.Services.AreaPerson.AreaSkill
                         {
                             Name = names[i],
                         };
+                        skillNew = await skillRepository.AddAsync(skillNew);
                         skills.Add(skillNew);
                         isCreateSkkill = true;
                     }
@@ -75,51 +76,37 @@ namespace HallOfFame.Service.Services.AreaPerson.AreaSkill
             }
         }
 
-        public async Task<EntityListOperationResult<SkillOfLevelDto>> UpdateListSkillOfLevelAsync(List<SkillOfLevelEditDto> skills, bool isCreate = true)
+        public async Task<EntityListOperationResult<SkillOfLevelDto>> UpdateListSkillOfLevelAsync(List<SkillOfLevelEditDto> skillOfLevels, List<SkillDto> skills)
         {
             try
             {
-                var skillOfLevels = new List<SkillOfLevel>();
+                var skillOfLevelRets = new List<SkillOfLevel>();
                 SkillOfLevel skillOfLevel = null;
-                long idSkill = 0;
+                SkillDto skillDto = null;
                 bool isCreateSkkill = false;
-                foreach (var skill in skills)
+                foreach (var skill in skillOfLevels)
                 {
-                    idSkill = skills.FirstOrDefault(x => x.Name == skill.Name).Id;
-                    if (isCreate)
-                    {
-                        skillOfLevel = new SkillOfLevel
+                    skillDto = skills.FirstOrDefault(x => x.Name == skill.Name);
+                    try
                         {
-                            SkillId = idSkill,
-                            Level = skill.StartLevel
-                        };
-                        isCreateSkkill = true;
-                        skillOfLevel = await skillOfLevelRepository.AddAsync(skillOfLevel);
-                        skillOfLevels.Add(skillOfLevel);
-                    }
-                    else
-                    {
-                        try
-                        {
-                            skillOfLevel = await skillOfLevelRepository.GetSkillByLevel(idSkill, skill.StartLevel);
-                            skillOfLevels.Add(skillOfLevel);
+                            skillOfLevel = await skillOfLevelRepository.GetSkillByLevel(skillDto.Id, skill.StartLevel);
+                            skillOfLevelRets.Add(skillOfLevel);
                         }
                         catch (Exception e)
                         {
                             skillOfLevel = new SkillOfLevel
                             {
-                                SkillId = idSkill,
+                                SkillId = skillDto.Id,
                                 Level = skill.StartLevel
                             };
                             isCreateSkkill = true;
                             skillOfLevel =  await skillOfLevelRepository.AddAsync(skillOfLevel);
-                            skillOfLevels.Add(skillOfLevel);
+                            skillOfLevelRets.Add(skillOfLevel);
                         }
-                    }
                 }
                 if (isCreateSkkill)
                     await skillOfLevelRepository.SaveAsync();
-                var skillDtos = mapper.Map<List<SkillOfLevelDto>>(skillOfLevels);
+                var skillDtos = mapper.Map<List<SkillOfLevelDto>>(skillOfLevelRets);
                 return EntityListOperationResult<SkillOfLevelDto>.Success(skillDtos);
             }
             catch (Exception ex)
@@ -142,7 +129,7 @@ namespace HallOfFame.Service.Services.AreaPerson.AreaSkill
                         skillOfPerson = new SkillOfPerson
                         {
                             SkillOfLevelId = skill.Id,
-                            PersonId = skill.StartLevel
+                            PersonId = personId
                         };
                         isCreateSkkill = true;
                         skillOfPerson = await skillOfPersonRepository.AddAsync(skillOfPerson);
@@ -167,7 +154,7 @@ namespace HallOfFame.Service.Services.AreaPerson.AreaSkill
                             skillOfPerson = new SkillOfPerson
                             {
                                 SkillOfLevelId = skill.Id,
-                                PersonId = skill.StartLevel
+                                PersonId = personId
                             };
                             isCreateSkkill = true;
                             skillOfPerson = await skillOfPersonRepository.AddAsync(skillOfPerson);

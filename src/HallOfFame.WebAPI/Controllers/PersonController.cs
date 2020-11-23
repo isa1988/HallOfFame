@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
 using HallOfFame.Service.Contracts.AreaPerson;
+using HallOfFame.Service.Dto.AreaPerson;
 using HallOfFame.WebAPI.Models.Person;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,14 +14,14 @@ namespace HallOfFame.WebAPI.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        public PersonController(IMapper mapper, IPersonService personService)
+        public PersonController(IMapper mapper, IPersonSkillService personSkillService)
         {
             this.mapper = mapper;
-            this.personService = personService;
+            this.personSkillService = personSkillService;
         }
 
         private readonly IMapper mapper;
-        private readonly IPersonService personService;
+        private readonly IPersonSkillService personSkillService;
 
         /// <summary>
         /// Вытащить всех людей
@@ -27,7 +30,7 @@ namespace HallOfFame.WebAPI.Controllers
         [HttpGet]
         public async Task<List<PersonModel>> GetAll()
         {
-            var dtos = await personService.GetAllDeteilsAsync();
+            var dtos = await personSkillService.GetAllDeteilsAsync();
             var models = mapper.Map<List<PersonModel>>(dtos);
             return models;
         }
@@ -40,7 +43,7 @@ namespace HallOfFame.WebAPI.Controllers
         [HttpGet("{id:long}")]
         public async Task<PersonOneModel> GetById(long id)
         {
-            var dto = await personService.GetByIdDeteilsAsync(id);
+            var dto = await personSkillService.GetByIdDeteilsAsync(id);
             if (dto.IsSuccess)
             {
                 var model = mapper.Map<PersonOneModel>(dto.Entity);
@@ -54,6 +57,36 @@ namespace HallOfFame.WebAPI.Controllers
                     Error = dto.GetErrorString()
                 };
             }
+        }
+
+        /// <summary>
+        /// Добавить нового человека
+        /// </summary>
+        /// <param name="model">сотрудник</param>
+        /// <returns></returns>
+        [HttpPost("Create")]
+        public async Task<HttpResponseMessage> Add([FromBody] PersonCreateModel model)
+        {
+
+            HttpResponseMessage returnMessage = new HttpResponseMessage();
+
+            var personEditDto = mapper.Map<PersonEditDto>(model);
+            var result = await personSkillService.CreateAsync(personEditDto);
+            if (result.IsSuccess)
+            {
+
+                string message = ($"Person Created - {result.Entity.Id}");
+                returnMessage = new HttpResponseMessage(HttpStatusCode.Created);
+                returnMessage.RequestMessage = new HttpRequestMessage(HttpMethod.Post, message);
+            }
+            else
+            {
+                returnMessage = new HttpResponseMessage(HttpStatusCode.ExpectationFailed);
+                returnMessage.RequestMessage = new HttpRequestMessage(HttpMethod.Post, result.GetErrorString());
+            }
+
+
+            return returnMessage;
         }
     }
 }

@@ -39,6 +39,10 @@ namespace HallOfFame.WebAPI.AppStart.AutoMapper
             CreateMap<PersonModel, PersonEditDto>()
                 .ForMember(p => p.FirstName, n => n.MapFrom(m => m.Name))
                 .ForMember(p => p.SurName, n => n.MapFrom(m => m.DisplayName));
+            CreateMap<PersonCreateModel, PersonEditDto>()
+                .ForMember(p => p.Id, n => n.Ignore())
+                .ForMember(p => p.FirstName, n => n.MapFrom(m => m.Name))
+                .ForMember(p => p.SurName, n => n.MapFrom(m => m.DisplayName));
         }
 
         private void SkillMapping()

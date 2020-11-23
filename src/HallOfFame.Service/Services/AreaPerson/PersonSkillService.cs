@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using HallOfFame.Core.Contracts.AreaPerson;
@@ -49,7 +50,7 @@ namespace HallOfFame.Service.Services.AreaPerson
                 }
 
                 var skillOfLevels = new List<SkillOfLevelEditDto>();
-                var resultSkillOfLevel = await skillOfLevelService.UpdateListSkillOfLevelAsync(createDto.Skills);
+                var resultSkillOfLevel = await skillOfLevelService.UpdateListSkillOfLevelAsync(createDto.Skills, skills);
 
                 if (resultSkillOfLevel.IsSuccess)
                 {
@@ -73,7 +74,6 @@ namespace HallOfFame.Service.Services.AreaPerson
                     skillOfLevels[i].IsDelete = createDto.Skills.FirstOrDefault(x =>
                         x.Name == skillOfLevels[i].Name &&
                         x.StartLevel == skillOfLevels[i].StartLevel)?.IsDelete ?? false;
-                    skillOfLevels[i].SkillId = skills.FirstOrDefault(x => x.Name.ToLower() == skillOfLevels[i].Name.ToLower()).Id;
                 }
                 var resultSkillsOfPerson = await skillOfLevelService.UpdateListSkillOfPersonAsync(skillOfLevels, entity.Id);
 
@@ -121,7 +121,7 @@ namespace HallOfFame.Service.Services.AreaPerson
                 }
 
                 var skillOfLevels = new List<SkillOfLevelEditDto>();
-                var resultSkillOfLevel = await skillOfLevelService.UpdateListSkillOfLevelAsync(editDto.Skills, false);
+                var resultSkillOfLevel = await skillOfLevelService.UpdateListSkillOfLevelAsync(editDto.Skills,  skills);
 
                 if (resultSkillOfLevel.IsSuccess)
                 {
@@ -157,12 +157,42 @@ namespace HallOfFame.Service.Services.AreaPerson
 
         public override ResolveOptions GetOptionsForDeteils()
         {
-            throw new NotImplementedException();
+            return new ResolveOptions
+            {
+                IsSkills = true,
+                IsSkill = true
+            };
         }
 
         protected override string CheckBeforeModification(PersonEditDto value, bool isNew = true)
         {
-            throw new NotImplementedException();
+            StringBuilder errors = new StringBuilder(string.Empty);
+            if (value == null)
+                errors.Append("Не передан объект для действий");
+
+            if (string.IsNullOrWhiteSpace(value.FirstName))
+                errors.Append("Не заполнено имя человека");
+            if (string.IsNullOrWhiteSpace(value.SurName))
+                errors.Append("Не заполнено фамилия человека");
+
+            if (value.Skills?.Count > 0)
+            {
+                foreach (var skill in value.Skills)
+                {
+                    if (string.IsNullOrWhiteSpace(skill.Name))
+                        errors.Append("Не заполненно наименование навыка");
+                    if (skill.StartLevel <= 0)
+                        errors.Append($"Начальный уровень навыка {skill.Name} не может быть меньше 1");
+                    if (skill.EndLevel > 10)
+                        errors.Append($"Конечный уровень навыка {skill.Name} не может быть больше 10");
+                    if (skill.EndLevel > 10)
+                        errors.Append($"Начальный уровень навыка {skill.Name} не может быть больше 10");
+                }
+            }
+
+            
+            
+            return errors.ToString();
         }
 
         protected override string CkeckBeforeDelete(Person entity)
