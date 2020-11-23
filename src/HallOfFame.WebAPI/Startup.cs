@@ -40,6 +40,12 @@ namespace HallOfFame.WebAPI
             services.AddDatabaseContext(Configuration);
             services.AddAutoMapperCustom();
             services.AddControllers();
+
+            services.AddOpenApiDocument(options =>
+            {
+                options.Title = "PromoCode Factory API Doc";
+                options.Version = "1.0";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +55,12 @@ namespace HallOfFame.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3(x =>
+            {
+                x.DocExpansion = "list";
+            });
 
             app.UseHttpsRedirection();
 
