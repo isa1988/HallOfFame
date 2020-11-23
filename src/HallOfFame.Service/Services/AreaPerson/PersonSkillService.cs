@@ -170,9 +170,9 @@ namespace HallOfFame.Service.Services.AreaPerson
                 errors.Append("Не передан объект для действий");
 
             if (string.IsNullOrWhiteSpace(value.FirstName))
-                errors.Append("Не заполнено имя человека");
+                errors.Append("Не заполнено имя сотрудника");
             if (string.IsNullOrWhiteSpace(value.SurName))
-                errors.Append("Не заполнено фамилия человека");
+                errors.Append("Не заполнено фамилия сотрудника");
 
             if (value.Skills?.Count > 0)
             {

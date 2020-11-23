@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HallOfFame.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/v1/[controller]")]
     public class PersonController : ControllerBase
     {
         public PersonController(IMapper mapper, IPersonSkillService personSkillService)
@@ -24,7 +24,7 @@ namespace HallOfFame.WebAPI.Controllers
         private readonly IPersonSkillService personSkillService;
 
         /// <summary>
-        /// Вытащить всех людей
+        /// Вытащить всех сотрудников
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -36,7 +36,7 @@ namespace HallOfFame.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Показать человека по идентификатору
+        /// Показать сотрудника по идентификатору
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -60,7 +60,7 @@ namespace HallOfFame.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Добавить нового человека
+        /// Добавить нового сотрудника
         /// </summary>
         /// <param name="model">сотрудник</param>
         /// <returns></returns>
@@ -91,7 +91,7 @@ namespace HallOfFame.WebAPI.Controllers
 
 
         /// <summary>
-        /// Редактировать человека
+        /// Редактировать сотрудника
         /// </summary>
         /// <param name="model">сотрудник</param>
         /// <returns></returns>
@@ -122,7 +122,7 @@ namespace HallOfFame.WebAPI.Controllers
 
 
         /// <summary>
-        /// Удалить человека
+        /// Удалить сотрудника
         /// </summary>
         /// <param name="model">сотрудник</param>
         /// <returns></returns>

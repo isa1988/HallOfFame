@@ -23,7 +23,7 @@ namespace HallOfFame.DAL.Repository.AreaPerson.AreaSkill
             var entity = await ResolveInclude(resolveOptions, false)
                                          .FirstOrDefaultAsync(x => x.PersonId == personId && x.SkillOfLevelId == skillId);
             if (entity == null)
-                throw new NullReferenceException("Не найдено значение");
+                throw new NullReferenceException("Не найдено значение сотрудника по навыку");
             ClearDbSetForInclude(entity);
             return entity;
         }
