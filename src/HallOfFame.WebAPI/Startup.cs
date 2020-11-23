@@ -21,6 +21,7 @@ using HallOfFame.Service.Contracts.AreaPerson.AreaSkill;
 using HallOfFame.Service.Services.AreaPerson;
 using HallOfFame.Service.Services.AreaPerson.AreaSkill;
 using HallOfFame.WebAPI.AppStart;
+using HallOfFame.WebAPI.AppStart.AutoMapper;
 
 namespace HallOfFame.WebAPI
 {
@@ -37,6 +38,7 @@ namespace HallOfFame.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDatabaseContext(Configuration);
+            services.AddAutoMapperCustom();
             services.AddControllers();
         }
 
