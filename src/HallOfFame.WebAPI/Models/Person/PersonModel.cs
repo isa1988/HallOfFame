@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HallOfFame.WebAPI.Models.Skill;
 
 namespace HallOfFame.WebAPI.Models.Person
 {

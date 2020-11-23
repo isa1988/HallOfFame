@@ -137,7 +137,6 @@ namespace HallOfFame.Service.Services.AreaPerson
                     skillOfLevels[i].IsDelete = editDto.Skills.FirstOrDefault(x =>
                         x.Name == skillOfLevels[i].Name &&
                         x.StartLevel == skillOfLevels[i].StartLevel)?.IsDelete ?? false;
-                    skillOfLevels[i].SkillId = skills.FirstOrDefault(x => x.Name.ToLower() == skillOfLevels[i].Name.ToLower()).Id;
                 }
                 var resultSkillsOfPerson = await skillOfLevelService.UpdateListSkillOfPersonAsync(skillOfLevels, editDto.Id, false);
 

@@ -37,6 +37,11 @@ namespace HallOfFame.DAL.Repository.AreaPerson.AreaSkill
         {
             IQueryable<SkillOfPerson> query = dbSet.Where(x=> x.IsDelete == isDelete);
 
+            if (resolveOptions == null)
+            {
+                return query;
+            }
+
             if (resolveOptions.IsPerson)
             {
                 query = query.Include(x => x.Person);

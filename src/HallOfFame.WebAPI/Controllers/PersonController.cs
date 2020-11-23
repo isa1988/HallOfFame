@@ -88,5 +88,36 @@ namespace HallOfFame.WebAPI.Controllers
 
             return returnMessage;
         }
+
+
+        /// <summary>
+        /// Редактировать человека
+        /// </summary>
+        /// <param name="model">сотрудник</param>
+        /// <returns></returns>
+        [HttpPut("Update")]
+        public async Task<HttpResponseMessage> Edit([FromBody] PersonEditModel model)
+        {
+
+            HttpResponseMessage returnMessage = new HttpResponseMessage();
+
+            var personEditDto = mapper.Map<PersonEditDto>(model);
+            var result = await personSkillService.EditAsync(personEditDto);
+            if (result.IsSuccess)
+            {
+
+                string message = ($"Person Update - {result.Entity.Id}");
+                returnMessage = new HttpResponseMessage(HttpStatusCode.OK);
+                returnMessage.RequestMessage = new HttpRequestMessage(HttpMethod.Put, message);
+            }
+            else
+            {
+                returnMessage = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                returnMessage.RequestMessage = new HttpRequestMessage(HttpMethod.Put, result.GetErrorString());
+            }
+
+
+            return returnMessage;
+        }
     }
 }

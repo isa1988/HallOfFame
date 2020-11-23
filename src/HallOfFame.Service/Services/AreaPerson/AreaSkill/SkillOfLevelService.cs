@@ -139,7 +139,7 @@ namespace HallOfFame.Service.Services.AreaPerson.AreaSkill
                     {
                         try
                         {
-                            skillOfPerson = await skillOfPersonRepository.GetByPersonAndSkill(personId, skill.StartLevel);
+                            skillOfPerson = await skillOfPersonRepository.GetByPersonAndSkill(personId, skill.Id);
                             if (skill.IsDelete)
                             {
                                 skillOfPersonRepository.DeleteFromDB(skillOfPerson);

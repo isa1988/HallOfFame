@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HallOfFame.WebAPI.Models
+namespace HallOfFame.WebAPI.Models.Skill
 {
-    public class SkillModel
+    public class SkillCreateModel
     {
         public string Name { get; set; }
 
