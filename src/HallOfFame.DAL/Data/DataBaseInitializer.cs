@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using HallOfFame.Core.Contracts;
 using HallOfFame.Core.Contracts.AreaPerson;
 using HallOfFame.Core.Contracts.AreaPerson.AreaSkill;
@@ -32,7 +33,7 @@ namespace HallOfFame.DAL.Data
         private readonly ISkillOfPersonRepository skillOfPersonRepository;
         private readonly IPersonRepository personRepository;
 
-        public void Initialize()
+        public async Task InitializeAsync()
         {
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
@@ -42,14 +43,14 @@ namespace HallOfFame.DAL.Data
                 if (skillRepository.IsEqualsAsyncTask("SQL").Result)
                     return;
 
-                var skills = SkillAddDB();
-                var skillOfLevels = SkillOfLevelAddDB(skills);
-                var persons = PersonAddDB();
-                SkillOfPersonAddDB(persons, skillOfLevels);
+                var skills = await SkillAddDBAsync();
+                var skillOfLevels = await SkillOfLevelAddDBAsync(skills);
+                var persons = await PersonAddDBAsync();
+                await SkillOfPersonAddDBAsync(persons, skillOfLevels);
             }
         }
 
-        private List<Skill> SkillAddDB()
+        private async Task<List<Skill>> SkillAddDBAsync()
         {
             var skills = new List<Skill>();
             skills.Add(new Skill { Name = "SQL" });
@@ -59,12 +60,12 @@ namespace HallOfFame.DAL.Data
             skills.Add(new Skill { Name = "VS2019" });
             skills.Add(new Skill { Name = "Russian" });
             
-            SaveOperation(skills, skillRepository);
+            await SaveOperationAsync(skills, skillRepository);
             
             return skills;
         }
 
-        private List<SkillOfLevel> SkillOfLevelAddDB(List<Skill> skills)
+        private async Task<List<SkillOfLevel>> SkillOfLevelAddDBAsync(List<Skill> skills)
         {
             var skillOfLevels = new List<SkillOfLevel>();
             skillOfLevels.Add(new SkillOfLevel { SkillId = skills[0].Id, Level = 10 });//0
@@ -80,24 +81,24 @@ namespace HallOfFame.DAL.Data
             skillOfLevels.Add(new SkillOfLevel { SkillId = skills[5].Id, Level = 10 });//10
             skillOfLevels.Add(new SkillOfLevel { SkillId = skills[5].Id, Level = 5 });//11
             
-            SaveOperation(skillOfLevels, skillOfLevelRepository);
+            await SaveOperationAsync(skillOfLevels, skillOfLevelRepository);
             
             return skillOfLevels;
         }
 
-        private List<Person> PersonAddDB()
+        private async Task<List<Person>> PersonAddDBAsync()
         {
             var persons = new List<Person>();
             persons.Add(new Person { SurName = "Пктров", FirstName = "Анатолий" });
             persons.Add(new Person { SurName = "Пупкин", FirstName = "Василмй" });
             persons.Add(new Person { SurName = "Соколов", FirstName = "Никита" });
 
-            SaveOperation(persons, personRepository);
+            await SaveOperationAsync(persons, personRepository);
 
             return persons;
         }
 
-        private List<SkillOfPerson> SkillOfPersonAddDB(List<Person> persons, List<SkillOfLevel> skillOfLevels)
+        private async Task<List<SkillOfPerson>> SkillOfPersonAddDBAsync(List<Person> persons, List<SkillOfLevel> skillOfLevels)
         {
             var skillOfPersons = new List<SkillOfPerson>();
             skillOfPersons.Add(new SkillOfPerson { PersonId = persons[0].Id, SkillOfLevelId = skillOfLevels[0].Id });
@@ -107,32 +108,32 @@ namespace HallOfFame.DAL.Data
             skillOfPersons.Add(new SkillOfPerson { PersonId = persons[0].Id, SkillOfLevelId = skillOfLevels[8].Id });
             skillOfPersons.Add(new SkillOfPerson { PersonId = persons[0].Id, SkillOfLevelId = skillOfLevels[3].Id });
 
-            SaveOperation(skillOfPersons, skillOfPersonRepository);
+            await SaveOperationAsync(skillOfPersons, skillOfPersonRepository);
 
             return skillOfPersons;
         }
 
-        private void SaveOperation<TEntity>(List<TEntity> entities, IRepository<TEntity> repository)
+        private async Task SaveOperationAsync<TEntity>(List<TEntity> entities, IRepository<TEntity> repository)
             where TEntity : class, IEntity
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                repository.Add(entities[i]);
+                await repository.AddAsync(entities[i]);
             }
 
-            repository.Save();
+            await repository.SaveAsync();
         }
 
-        private void SaveOperation<TEntity, TId>(List<TEntity> entities, IRepository<TEntity, TId> repository)
+        private async Task SaveOperationAsync<TEntity, TId>(List<TEntity> entities, IRepository<TEntity, TId> repository)
             where TEntity : class, IEntity<TId>
             where TId : IEquatable<TId>
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                repository.Add(entities[i]);
+                await repository.AddAsync(entities[i]);
             }
 
-            repository.Save();
+            await repository.SaveAsync();
         }
     }
 }

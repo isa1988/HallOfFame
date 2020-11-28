@@ -72,7 +72,7 @@ namespace HallOfFame.WebAPI
             {
                 endpoints.MapControllers();
             });
-            dbInitializer.Initialize();
+            dbInitializer.InitializeAsync().GetAwaiter().GetResult();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

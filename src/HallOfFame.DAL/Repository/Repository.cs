@@ -29,12 +29,6 @@ namespace HallOfFame.DAL.Repository
 
             return entry.Entity;
         }
-        public virtual T Add(T entity)
-        {
-            var entry = dbSet.Add(entity);
-
-            return entry.Entity;
-        }
 
         public virtual async Task<List<T>> GetAllOfPageAsync(int pageNumber, int rowCount, ResolveOptions resolveOptions = null)
         {
@@ -110,11 +104,6 @@ namespace HallOfFame.DAL.Repository
         public virtual async Task SaveAsync()
         {
             await contextDB.SaveChangesAsync();
-        }
-
-        public virtual void Save()
-        {
-            contextDB.SaveChanges();
         }
         protected abstract IQueryable<T> ResolveInclude(ResolveOptions resolveOptions, bool isDelete);
     }
