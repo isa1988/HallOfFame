@@ -15,18 +15,20 @@
 
 #### Система должна оперировать следующими сущностями:
 
-` Person (Сотрудник):
-`{
-`  id: long,
-`  name: string,
-`  displayName: string,
-`  skills: [Skill, Skill, Skill, …]
-`}
-`Skill (Навык)
-`{
-`  name: string,
-`  level: byte // 1-10
-`} 
+```sh
+Person (Сотрудник):
+{
+  id: long,
+  name: string,
+  displayName: string,
+  skills: [Skill, Skill, Skill, …]
+}
+Skill (Навык)
+{
+  name: string,
+  level: byte // 1-10
+} 
+```
 
 ##### API взаимодействия
 
