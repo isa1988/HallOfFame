@@ -51,6 +51,7 @@ namespace HallOfFame.WebAPI.Controllers
             }
             else
             {
+                Response.StatusCode = 404;
                 return new PersonOneModel
                 {
                     IsError = true, 
